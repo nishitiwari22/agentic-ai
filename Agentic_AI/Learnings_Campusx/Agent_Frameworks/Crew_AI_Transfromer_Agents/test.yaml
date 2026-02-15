@@ -1,0 +1,27 @@
+
+---
+
+## Crew_AI_Transformer_Agents/README.md
+```markdown
+# CrewAI Transformer Agents
+
+This project demonstrates task-based agent orchestration using CrewAI.
+
+## Concept
+Multiple agents work together as a team (crew) to complete tasks.
+
+Example agents:
+- Researcher
+- Writer
+- Reviewer
+
+## Workflow
+1. Define agents
+2. Assign tasks
+3. Run the crew
+4. Get final output
+
+## Run
+```bash
+pip install crewai
+python app.py

@@ -1,0 +1,172 @@
+This section is about **saving and restoring the state of an AI workflow** built using **LangGraph**, and using **MongoDB** as the storage system for that state.
+
+Let’s break down each lecture title in simple terms.
+
+---
+
+## 174. What is Checkpointing? (Persistence in AI Agent Workflows)
+
+### Core idea
+
+**Checkpointing = saving the current state of an AI workflow** so it can be resumed later.
+
+### Why this is needed
+
+AI agents often:
+
+* Run long processes
+* Wait for user input
+* Call APIs
+* Perform multi-step reasoning
+
+If something crashes or stops, you **don’t want to start from the beginning**.
+
+So you:
+
+* Save the workflow state
+* Resume from the last saved point
+
+### Simple analogy
+
+Think of:
+
+* A **video game save point**
+* Or a **Google Doc auto-save**
+
+If power goes out, you don’t lose progress.
+
+### In LangGraph
+
+A workflow has:
+
+* Nodes (steps)
+* State (memory, variables, messages)
+
+Checkpointing saves:
+
+* The current node
+* The data flowing through the graph
+* Conversation or agent memory
+
+---
+
+## 175. Setting Up MongoDB with Docker for Checkpoint Storage
+
+This lecture is about **preparing the database** that will store the checkpoints.
+
+### What’s happening here
+
+You:
+
+1. Run **MongoDB inside a Docker container**
+2. Use it as a **persistent storage backend**
+3. Connect LangGraph to it
+
+### Why MongoDB?
+
+Because:
+
+* It stores data as JSON-like documents
+* Agent states are naturally JSON-like
+* Easy to scale and query
+
+### Typical steps in this lecture
+
+You’ll likely:
+
+1. Pull MongoDB image
+2. Run container
+3. Expose a port
+4. Create a database for checkpoints
+
+Example conceptually:
+
+```bash
+docker run -d -p 27017:27017 --name mongo mongo
+```
+
+Now:
+
+* MongoDB runs locally
+* LangGraph can store checkpoints there
+
+---
+
+## 176. Implementing MongoDB Checkpointer in LangGraph
+
+This is where everything comes together.
+
+### Goal
+
+Connect:
+
+* LangGraph workflow
+* MongoDB checkpoint storage
+
+So that:
+
+* Every step in the workflow is saved
+* You can resume later
+
+### What the code usually does
+
+1. Import MongoDB checkpointer
+2. Configure connection
+3. Attach it to the graph
+4. Run the workflow
+
+Conceptually:
+
+```python
+from langgraph.checkpoint.mongodb import MongoDBSaver
+
+checkpointer = MongoDBSaver(
+    connection_string="mongodb://localhost:27017",
+    db_name="langgraph"
+)
+
+app = graph.compile(checkpointer=checkpointer)
+```
+
+Now:
+
+* Every step is stored in MongoDB
+* If the app restarts, it resumes from the last checkpoint
+
+---
+
+## Big Picture: What This Section Teaches
+
+| Lecture | Main Concept               | Outcome                             |
+| ------- | -------------------------- | ----------------------------------- |
+| 174     | What checkpointing is      | Understand persistence in AI agents |
+| 175     | MongoDB setup with Docker  | Prepare storage for checkpoints     |
+| 176     | Integrating with LangGraph | Make workflows resumable            |
+
+---
+
+## Real-world use cases
+
+Checkpointing is used when:
+
+* Chatbots with long conversations
+* Multi-step research agents
+* Customer support AI
+* Data pipelines
+* Human-in-the-loop workflows
+
+Without checkpointing:
+
+* Any crash = lost progress
+
+With checkpointing:
+
+* Resume instantly from last state
+
+---
+
+If you’d like, I can:
+
+* Give you a **step-by-step setup guide** for this section
+* Explain the **code line-by-line**
+* Help you **run this on your system** using Docker and Python.

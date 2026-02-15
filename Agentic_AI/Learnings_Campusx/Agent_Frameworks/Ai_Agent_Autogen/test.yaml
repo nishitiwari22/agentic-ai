@@ -1,0 +1,25 @@
+
+---
+
+## Ai_Agent_Autogen/README.md
+```markdown
+# AI Agent using AutoGen
+
+This project demonstrates a multi-agent system using AutoGen.
+
+## Concept
+Two or more AI agents communicate with each other to solve a problem.
+
+## Example
+- Assistant agent
+- User proxy agent
+
+They collaborate to:
+- Write code
+- Solve tasks
+- Review outputs
+
+## Run
+```bash
+pip install pyautogen
+python app.py
