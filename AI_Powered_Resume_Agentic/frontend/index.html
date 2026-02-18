@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Resume Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>AI Resume Builder</h1>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('manual')">Manual Entry</button>
+        <button class="tab" onclick="showTab('upload')">Upload Resume</button>
+    </div>
+
+    <!-- Manual Form -->
+    <div id="manual" class="tab-content active">
+        <div class="card">
+            <label>Name</label>
+            <input type="text" id="name">
+
+            <label>Education</label>
+            <textarea id="education"></textarea>
+
+            <label>Skills</label>
+            <textarea id="skills"></textarea>
+
+            <label>Experience</label>
+            <textarea id="experience"></textarea>
+
+            <label>Projects</label>
+            <textarea id="projects"></textarea>
+        </div>
+    </div>
+
+    <!-- Upload Section -->
+    <div id="upload" class="tab-content">
+        <div class="card">
+            <label>Upload Resume (PDF or Word)</label>
+            <input type="file" id="resumeFile" accept=".pdf,.doc,.docx">
+        </div>
+    </div>
+
+    <!-- Button -->
+    <button class="main-btn" onclick="generate()">Generate Resume</button>
+
+    <!-- Output -->
+    <div class="card">
+        <h2>Enhanced Resume</h2>
+        <pre id="output">Your result will appear here...</pre>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
